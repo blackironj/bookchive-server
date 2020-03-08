@@ -1,0 +1,32 @@
+{
+    "Auth":{
+        "JWTKey": "JWT key",
+        "Issuer": "issuer",
+        "TokenExpireTimeHour": 48
+    },
+    "Server":{
+        "RunMode": "debug",
+        "Port": "3000",
+        "ReadTimeoutSec": 10,
+        "WriteTimeoutSec": 10,
+        "NumCPU": "DEFAULT"
+    },
+    "Database":{
+        "Type": "mysql",
+        "User": "root",
+        "Password": "root",
+        "Host": "127.0.0.1:3306",
+        "Name": "bookchive",
+        "MaxIdleConn": 30,
+        "MaxOpenConn": 30,
+        "MaxLifeTimeSec": 300
+    },
+    "Oauth":{
+        "Google":{
+            "Scopes":[
+                "google scope list"
+            ],
+            "CredFilePath":"cred file path"
+        }
+    }
+}
