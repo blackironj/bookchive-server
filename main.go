@@ -13,7 +13,7 @@ const ( //FIXME: read from config file
 func init() {
 	scopes := []string{
 		"https://www.googleapis.com/auth/userinfo.email",
-		// You have to select your own scope from here -> https://developers.google.com/identity/protocols/googlescopes#google_sign-in
+		"https://www.googleapis.com/auth/userinfo.profile",
 	}
 
 	google.SetupOAuth(googleCallbackURL, credFile, scopes)

@@ -85,7 +85,7 @@ func SigninHandler(ctx *gin.Context) {
 }
 
 func GetSigninURL(state string) string {
-	return conf.AuthCodeURL(state)
+	return conf.AuthCodeURL(state, oauth2.AccessTypeOffline)
 }
 
 // Auth is the google authorization middleware. You can use them to protect a routergroup.
