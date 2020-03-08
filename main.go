@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/blackironj/bookchive-server/env"
 	"github.com/blackironj/bookchive-server/oauth2/google"
 	"github.com/blackironj/bookchive-server/router"
 )
@@ -11,6 +12,8 @@ const ( //FIXME: read from config file
 )
 
 func init() {
+	env.Setup()
+
 	scopes := []string{
 		"https://www.googleapis.com/auth/userinfo.email",
 		"https://www.googleapis.com/auth/userinfo.profile",
