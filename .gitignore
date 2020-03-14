@@ -166,5 +166,8 @@ bookchive-server
 ### vscode debug running file
 __debug_bin
 
+### accual config
+config/config.json
+
 ### google oauth2 client credential
-credfile.json
+config/google-key.json

@@ -42,6 +42,7 @@ type Oauth struct {
 type Google struct {
 	Scopes       []string
 	CredFilePath string
+	CallbackURL  string
 }
 
 type Env struct {
