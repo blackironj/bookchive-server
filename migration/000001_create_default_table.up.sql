@@ -1,11 +1,13 @@
+-- 테이블 순서는 관계를 고려하여 한 번에 실행해도 에러가 발생하지 않게 정렬되었습니다.
+
 -- users Table Create SQL
 CREATE TABLE bookchive.users
 (
-    `uk`         INT            NOT NULL    AUTO_INCREMENT, 
+    `uuid`       VARCHAR(36)    NOT NULL, 
     `email`      VARCHAR(45)    NOT NULL, 
     `name`       VARCHAR(15)    NULL, 
     `signin_dt`  INT            NULL, 
-    PRIMARY KEY (uk)
+    PRIMARY KEY (uuid)
 );
 
 
@@ -28,16 +30,16 @@ CREATE TABLE bookchive.books
 -- users Table Create SQL
 CREATE TABLE bookchive.libraries
 (
-    `uk`        INT    NOT NULL    AUTO_INCREMENT, 
-    `user_uk`   INT    NOT NULL, 
-    `book_uk`   INT    NOT NULL, 
-    `added_dt`  INT    NULL, 
+    `uk`         INT            NOT NULL    AUTO_INCREMENT, 
+    `user_uuid`  VARCHAR(36)    NOT NULL, 
+    `book_uk`    INT            NOT NULL, 
+    `added_dt`   INT            NULL, 
     PRIMARY KEY (uk)
 );
 
 ALTER TABLE bookchive.libraries
-    ADD CONSTRAINT FK_libraries_user_uk_users_uk FOREIGN KEY (user_uk)
-        REFERENCES bookchive.users (uk) ON DELETE RESTRICT ON UPDATE RESTRICT;
+    ADD CONSTRAINT FK_libraries_user_uuid_users_uuid FOREIGN KEY (user_uuid)
+        REFERENCES bookchive.users (uuid) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 ALTER TABLE bookchive.libraries
     ADD CONSTRAINT FK_libraries_book_uk_books_uk FOREIGN KEY (book_uk)
@@ -47,10 +49,12 @@ ALTER TABLE bookchive.libraries
 -- users Table Create SQL
 CREATE TABLE bookchive.goals
 (
-    `uk`            INT    NOT NULL    AUTO_INCREMENT, 
-    `libraries_uk`  INT    NOT NULL, 
-    `start_dt`      INT    NULL, 
-    `end_dt`        INT    NULL, 
+    `uk`            INT           NOT NULL    AUTO_INCREMENT, 
+    `libraries_uk`  INT           NOT NULL, 
+    `start_dt`      INT           NULL, 
+    `end_dt`        INT           NULL, 
+    `goal_dt`       INT           NULL, 
+    `memo`          MEDIUMTEXT    NULL, 
     PRIMARY KEY (uk)
 );
 
