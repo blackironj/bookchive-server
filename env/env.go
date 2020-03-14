@@ -2,13 +2,16 @@ package env
 
 import (
 	"flag"
-	"log"
 	"path/filepath"
 
+	log "github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
 )
 
-const configPath = "/config"
+const (
+	configPath    = "/config"
+	componentName = "[ENV] "
+)
 
 type Auth struct {
 	JWTKey              string
@@ -24,11 +27,12 @@ type Server struct {
 	NumCPU          string
 }
 
-type Database struct {
+type DB struct {
 	Type           string
 	User           string
 	Password       string
 	Host           string
+	Port           int
 	Name           string
 	MaxIdleConn    int
 	MaxOpenConn    int
@@ -46,20 +50,22 @@ type Google struct {
 }
 
 type Env struct {
-	Auth     Auth
-	Server   Server
-	Database Database
-	Oauth    Oauth
+	Auth   Auth
+	Server Server
+	DB     DB
+	Oauth  Oauth
 }
 
 var Conf Env
 
 func Setup() {
+	setupLog()
+
 	configName := flag.String("config", "", "config file name")
 	flag.Parse()
 
 	if flag.NFlag() == 0 {
-		log.Fatal("need a config file name")
+		log.Fatal(componentName."need a config file name")
 	}
 
 	rootDir, _ := filepath.Abs("./")
@@ -69,10 +75,17 @@ func Setup() {
 	viper.AddConfigPath(rootDir + configPath)
 
 	if err := viper.ReadInConfig(); err != nil {
-		log.Fatal("cannot read a config file")
+		log.Fatal(componentName,"cannot read a config file")
 	}
 
 	if err := viper.Unmarshal(&Conf); err != nil {
-		log.Fatal("config has a wrong schema")
+		log.Fatal(componentName, "config has a wrong schema")
 	}
+}
+
+func setupLog() {
+	log.SetFormatter(&log.TextFormatter{
+		TimestampFormat: "2006-01-02 15:04:05",
+		FullTimestamp:   true,
+	})
 }

@@ -13,7 +13,7 @@ import (
 
 	"github.com/gin-gonic/contrib/sessions"
 	"github.com/gin-gonic/gin"
-	"github.com/golang/glog"
+	log "github.com/sirupsen/logrus"
 
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/google"
@@ -43,7 +43,8 @@ var conf *oauth2.Config
 var store sessions.CookieStore
 
 const (
-	stateKey = "state"
+	stateKey      = "state"
+	componentName = "[Google-Oauth] "
 )
 
 func randToken() string {
@@ -58,7 +59,7 @@ func SetupOAuth(redirectURL, credFile string, scopes []string) {
 	var c Credentials
 	file, err := ioutil.ReadFile(credFile)
 	if err != nil {
-		glog.Fatalf("[Gin-OAuth] File error: %v\n", err)
+		log.Fatalf(componentName, "File error: %v\n", err)
 	}
 	json.Unmarshal(file, &c)
 
@@ -126,7 +127,7 @@ func Auth() gin.HandlerFunc {
 		defer email.Body.Close()
 		data, err := ioutil.ReadAll(email.Body)
 		if err != nil {
-			glog.Errorf("[Gin-OAuth] Could not read Body: %s", err)
+			log.Errorf(componentName, "Could not read Body: %s", err)
 			ctx.AbortWithError(http.StatusInternalServerError, err)
 			return
 		}
@@ -134,7 +135,7 @@ func Auth() gin.HandlerFunc {
 		var user User
 		err = json.Unmarshal(data, &user)
 		if err != nil {
-			glog.Errorf("[Gin-OAuth] Unmarshal userinfo failed: %s", err)
+			log.Errorf(componentName, "Unmarshal userinfo failed: %s", err)
 			ctx.AbortWithError(http.StatusInternalServerError, err)
 			return
 		}
