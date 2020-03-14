@@ -59,7 +59,9 @@ func SetupOAuth(redirectURL, credFile string, scopes []string) {
 	var c Credentials
 	file, err := ioutil.ReadFile(credFile)
 	if err != nil {
-		log.Fatalf(componentName, "File error: %v\n", err)
+		log.WithFields(log.Fields{
+			"detail": err.Error(),
+		}).Fatal(componentName, "File error")
 	}
 	json.Unmarshal(file, &c)
 
@@ -127,7 +129,9 @@ func Auth() gin.HandlerFunc {
 		defer email.Body.Close()
 		data, err := ioutil.ReadAll(email.Body)
 		if err != nil {
-			log.Errorf(componentName, "Could not read Body: %s", err)
+			log.WithFields(log.Fields{
+				"detail": err.Error(),
+			}).Error(componentName, "Could not read Body")
 			ctx.AbortWithError(http.StatusInternalServerError, err)
 			return
 		}
@@ -135,7 +139,9 @@ func Auth() gin.HandlerFunc {
 		var user User
 		err = json.Unmarshal(data, &user)
 		if err != nil {
-			log.Errorf(componentName, "Unmarshal userinfo failed: %s", err)
+			log.WithFields(log.Fields{
+				"detail": err.Error(),
+			}).Error(componentName, "Unmarshal userinfo failed")
 			ctx.AbortWithError(http.StatusInternalServerError, err)
 			return
 		}

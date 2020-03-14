@@ -21,5 +21,5 @@ func init() {
 func main() {
 	r := router.InitRouter()
 
-	r.Run(env.Conf.Server.Port)
+	r.Run(":" + env.Conf.Server.Port)
 }
