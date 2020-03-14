@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/blackironj/bookchive-server/da"
 	"github.com/blackironj/bookchive-server/env"
 	"github.com/blackironj/bookchive-server/oauth2/google"
 	"github.com/blackironj/bookchive-server/router"
@@ -9,13 +10,16 @@ import (
 func init() {
 	env.Setup()
 
-	google.SetupOAuth(env.Conf.Oauth.Google.CallbackURL,
+	google.SetupOAuth(
+		env.Conf.Oauth.Google.CallbackURL,
 		env.Conf.Oauth.Google.CredFilePath,
 		env.Conf.Oauth.Google.Scopes)
+
+	da.InitDB()
 }
 
 func main() {
 	r := router.InitRouter()
 
-	r.Run(":3000")
+	r.Run(env.Conf.Server.Port)
 }

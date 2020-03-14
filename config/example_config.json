@@ -11,11 +11,12 @@
         "WriteTimeoutSec": 10,
         "NumCPU": "DEFAULT"
     },
-    "Database":{
+    "DB":{
         "Type": "mysql",
         "User": "root",
         "Password": "root",
-        "Host": "127.0.0.1:3306",
+        "Host": "127.0.0.1",
+        "Port": 3306,
         "Name": "bookchive",
         "MaxIdleConn": 30,
         "MaxOpenConn": 30,

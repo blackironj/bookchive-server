@@ -65,7 +65,7 @@ func Setup() {
 	flag.Parse()
 
 	if flag.NFlag() == 0 {
-		log.Fatal(componentName."need a config file name")
+		log.Fatal(componentName, "need a config file name")
 	}
 
 	rootDir, _ := filepath.Abs("./")
@@ -75,7 +75,7 @@ func Setup() {
 	viper.AddConfigPath(rootDir + configPath)
 
 	if err := viper.ReadInConfig(); err != nil {
-		log.Fatal(componentName,"cannot read a config file")
+		log.Fatal(componentName, "cannot read a config file")
 	}
 
 	if err := viper.Unmarshal(&Conf); err != nil {
