@@ -1,5 +1,3 @@
--- 테이블 순서는 관계를 고려하여 한 번에 실행해도 에러가 발생하지 않게 정렬되었습니다.
-
 -- users Table Create SQL
 CREATE TABLE bookchive.users
 (
@@ -14,8 +12,7 @@ CREATE TABLE bookchive.users
 -- users Table Create SQL
 CREATE TABLE bookchive.books
 (
-    `uk`          INT                   NOT NULL    AUTO_INCREMENT, 
-    `id`          VARCHAR(20) BINARY    NOT NULL, 
+    `id`          VARCHAR(12) BINARY    NOT NULL, 
     `title`       VARCHAR(45)           NOT NULL, 
     `subtitle`    VARCHAR(100)          NULL, 
     `authors`     VARCHAR(50)           NOT NULL, 
@@ -23,17 +20,17 @@ CREATE TABLE bookchive.books
     `categories`  VARCHAR(45)           NULL, 
     `thumbnail`   VARCHAR(250)          NULL, 
     `pages`       INT                   NULL, 
-    PRIMARY KEY (uk)
+    PRIMARY KEY (id)
 );
 
 
 -- users Table Create SQL
 CREATE TABLE bookchive.libraries
 (
-    `uk`         INT            NOT NULL    AUTO_INCREMENT, 
-    `user_uuid`  VARCHAR(36)    NOT NULL, 
-    `book_uk`    INT            NOT NULL, 
-    `added_dt`   INT            NULL, 
+    `uk`         INT                   NOT NULL    AUTO_INCREMENT, 
+    `user_uuid`  VARCHAR(36)           NOT NULL, 
+    `book_id`    VARCHAR(12) BINARY    NOT NULL, 
+    `added_dt`   INT                   NULL, 
     PRIMARY KEY (uk)
 );
 
@@ -42,8 +39,8 @@ ALTER TABLE bookchive.libraries
         REFERENCES bookchive.users (uuid) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 ALTER TABLE bookchive.libraries
-    ADD CONSTRAINT FK_libraries_book_uk_books_uk FOREIGN KEY (book_uk)
-        REFERENCES bookchive.books (uk) ON DELETE RESTRICT ON UPDATE RESTRICT;
+    ADD CONSTRAINT FK_libraries_book_id_books_id FOREIGN KEY (book_id)
+        REFERENCES bookchive.books (id) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 
 -- users Table Create SQL
