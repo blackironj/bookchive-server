@@ -24,5 +24,7 @@ func InitRouter() *gin.Engine {
 		}
 	}
 
+	r.GET("/v1/books/:book_id", handler.GetBook)
+
 	return r
 }

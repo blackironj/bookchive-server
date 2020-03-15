@@ -15,10 +15,10 @@ CREATE TABLE bookchive.books
     `id`          VARCHAR(12) BINARY    NOT NULL, 
     `title`       VARCHAR(45)           NOT NULL, 
     `subtitle`    VARCHAR(100)          NULL, 
-    `authors`     VARCHAR(50)           NOT NULL, 
-    `publisher`   VARCHAR(25)           NOT NULL, 
-    `categories`  VARCHAR(45)           NULL, 
-    `thumbnail`   VARCHAR(250)          NULL, 
+    `authors`     VARCHAR(100)          NOT NULL, 
+    `publisher`   VARCHAR(100)          NOT NULL, 
+    `categories`  VARCHAR(150)          NULL, 
+    `thumbnail`   VARCHAR(400)          NULL, 
     `pages`       INT                   NULL, 
     PRIMARY KEY (id)
 );
