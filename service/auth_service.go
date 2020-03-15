@@ -6,10 +6,11 @@ import (
 	"github.com/jmoiron/sqlx"
 
 	"github.com/blackironj/bookchive-server/da"
+	"github.com/blackironj/bookchive-server/model"
 )
 
 //Signin with google
-func Signin(signinData *da.Users) error {
+func Signin(signinData *model.Users) error {
 	where := "WHERE email = ?"
 	condVal := []interface{}{signinData.Email}
 
@@ -32,7 +33,7 @@ func Signin(signinData *da.Users) error {
 	}
 
 	txErr := da.DoInTransaction(func(tx *sqlx.Tx) error {
-		newUser := &da.Users{
+		newUser := &model.Users{
 			Email: signinData.Email,
 			Name:  signinData.Name,
 		}
