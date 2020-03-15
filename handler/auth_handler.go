@@ -35,6 +35,13 @@ func SigninWithGoogleCallback(ctx *gin.Context) {
 		return
 	}
 
-	//TODO: Generate a JWT and then return jwt to user
-	ctx.JSON(http.StatusOK, "SUCCESS")
+	token, tokErr := service.GenJWT(user)
+	if tokErr != nil {
+		ctx.JSON(http.StatusInternalServerError, tokErr)
+		return
+	}
+
+	ctx.JSON(http.StatusOK, map[string]interface{}{
+		"token": token,
+	})
 }

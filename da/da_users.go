@@ -4,7 +4,6 @@ import (
 	"errors"
 	"time"
 
-	"github.com/google/uuid"
 	"github.com/jmoiron/sqlx"
 
 	"github.com/blackironj/bookchive-server/model"
@@ -29,13 +28,8 @@ func GetUsers(db *sqlx.DB, where string, condVal []interface{}) ([]model.Users, 
 
 //InsertUser add new user to DB
 func InsertUser(tx *sqlx.Tx, user *model.Users) error {
-	u, err := uuid.NewRandom()
-	if err != nil {
-		return err
-	}
-
 	stmt := "INSERT INTO users (uuid, email, name, signin_dt) VALUES (?, ?, ?, ?)"
-	res, err := tx.Exec(stmt, u.String(), user.Email, user.Name, time.Now().Unix())
+	res, err := tx.Exec(stmt, user.UUID, user.Email, user.Name, time.Now().Unix())
 	if err != nil {
 		return err
 	}
