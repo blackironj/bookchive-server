@@ -17,5 +17,24 @@ type Books struct {
 	Publisher  string  `db:"publisher" json:"publisher"`
 	Categories *string `db:"categories" json:"categories"`
 	Thumbnail  *string `db:"thumbnail" json:"thumbnail"`
-	Pages      *string `db:"pages" json:"pages"`
+	Pages      *int    `db:"pages" json:"pages"`
+}
+
+//Libraries Model
+type Libraries struct {
+	UK       int    `db:"uk" json:"uk"`
+	UserUUID string `db:"user_uuid" json:"user_uuid"`
+	BookID   string `db:"book_id"  json:"book_id"`
+	AddedDT  *int64 `db:"added_dt" json:"added_dt"`
+}
+
+//BooksInLibrary Model
+type BooksInLibrary struct {
+	UK         int     `db:"uk" json:"uk"`
+	BookID     string  `db:"book_id" json:"book_id"`
+	AddedDT    *int64  `db:"added_dt" json:"added_dt"`
+	Title      string  `db:"title" json:"title"`
+	Authors    string  `db:"authors" json:"authors"`
+	Categories *string `db:"categores" json:"categories"`
+	Thumbnail  *string `db:"thumbnail" json:"thumbnail"`
 }

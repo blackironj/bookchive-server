@@ -37,7 +37,7 @@ func InsertBooks(tx *sqlx.Tx, books []model.Books) error {
 		valArgs = append(valArgs, book.Pages)
 	}
 
-	stmt := `INSERT INTO IGNORE books(id, title, subtitle, authors, publisher, categories, thumbnail, pages) VALUES %s`
+	stmt := `INSERT IGNORE INTO books(id, title, subtitle, authors, publisher, categories, thumbnail, pages) VALUES %s`
 	stmt = fmt.Sprintf(stmt, strings.Join(valStrings, ","))
 
 	_, err := tx.Exec(stmt, valArgs...)

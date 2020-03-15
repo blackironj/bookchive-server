@@ -4,6 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 
 	"github.com/blackironj/bookchive-server/handler"
+	"github.com/blackironj/bookchive-server/middleware/jwt"
 	"github.com/blackironj/bookchive-server/oauth2/google"
 )
 
@@ -24,7 +25,12 @@ func InitRouter() *gin.Engine {
 		}
 	}
 
-	r.GET("/v1/books/:book_id", handler.GetBook)
+	v1Path := r.Group("/v1")
+	v1Path.Use(jwt.CheckToken())
+	{
+		v1Path.GET("/users/:uuid/books/:book_id", handler.GetBook)
+		v1Path.POST("/libraries", handler.AddLib)
+	}
 
 	return r
 }

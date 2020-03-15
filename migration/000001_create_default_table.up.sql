@@ -16,7 +16,7 @@ CREATE TABLE bookchive.books
     `title`       VARCHAR(45)           NOT NULL, 
     `subtitle`    VARCHAR(100)          NULL, 
     `authors`     VARCHAR(100)          NOT NULL, 
-    `publisher`   VARCHAR(100)          NOT NULL, 
+    `publisher`   VARCHAR(100)          NULL, 
     `categories`  VARCHAR(150)          NULL, 
     `thumbnail`   VARCHAR(400)          NULL, 
     `pages`       INT                   NULL, 
