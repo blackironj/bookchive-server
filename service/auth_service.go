@@ -16,7 +16,7 @@ func Signin(signinData *da.Users) error {
 	user, _ := da.GetUsers(da.DB, where, condVal)
 	if user != nil {
 		txErr := da.DoInTransaction(func(tx *sqlx.Tx) error {
-			setStmt := "SET signin_dt = ? WHERE = ?"
+			setStmt := "signin_dt = ? WHERE uuid = ?"
 			val := []interface{}{time.Now().Unix(), user[0].UUID}
 
 			if err := da.UpdateUser(tx, setStmt, val); err != nil {
@@ -28,6 +28,7 @@ func Signin(signinData *da.Users) error {
 		if txErr != nil {
 			return txErr
 		}
+		return nil
 	}
 
 	txErr := da.DoInTransaction(func(tx *sqlx.Tx) error {
