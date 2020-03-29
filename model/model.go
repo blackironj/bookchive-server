@@ -1,15 +1,15 @@
 package model
 
-//Users Model
-type Users struct {
+//User Model
+type User struct {
 	UUID     string  `db:"uuid"`
 	Email    string  `db:"email"`
 	Name     *string `db:"name"`
 	SigninDT *int64  `db:"signin_dt"`
 }
 
-//Books Model
-type Books struct {
+//Book Model
+type Book struct {
 	ID         string  `db:"id" json:"id" binding:"required"`
 	Title      string  `db:"title" json:"title" binding:"required"`
 	Subtitle   *string `db:"subtitle" json:"subtitle"`
@@ -20,8 +20,8 @@ type Books struct {
 	Pages      *int    `db:"pages" json:"pages"`
 }
 
-//Libraries Model
-type Libraries struct {
+//Library Model
+type Library struct {
 	UK       int    `db:"uk" json:"uk"`
 	UserUUID string `db:"user_uuid" json:"user_uuid"`
 	BookID   string `db:"book_id"  json:"book_id"`

@@ -11,7 +11,7 @@ import (
 )
 
 func AddLib(ctx *gin.Context) {
-	var books []model.Books
+	var books []*model.Book
 	if bindErr := ctx.ShouldBindJSON(&books); bindErr != nil {
 		fmt.Println(bindErr)
 		ctx.JSON(http.StatusBadRequest, bindErr.Error())

@@ -8,16 +8,16 @@ import (
 	"github.com/jmoiron/sqlx"
 )
 
-func AddLib(uuid string, books []model.Books) error {
+func AddLib(uuid string, books []*model.Book) error {
 	txErr := da.DoInTransaction(func(tx *sqlx.Tx) error {
 		if err := da.InsertBooks(tx, books); err != nil {
 			return err
 		}
 
 		currTime := time.Now().Unix()
-		libs := []model.Libraries{}
+		libs := []model.Library{}
 		for _, book := range books {
-			libs = append(libs, model.Libraries{
+			libs = append(libs, model.Library{
 				UserUUID: uuid,
 				BookID:   book.ID,
 				AddedDT:  &currTime,

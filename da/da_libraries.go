@@ -8,7 +8,7 @@ import (
 	"github.com/jmoiron/sqlx"
 )
 
-func InsertLibraries(tx *sqlx.Tx, libraries []model.Libraries) error {
+func InsertLibraries(tx *sqlx.Tx, libraries []model.Library) error {
 	valStrings := []string{}
 	valArgs := []interface{}{}
 

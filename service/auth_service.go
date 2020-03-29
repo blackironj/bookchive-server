@@ -14,7 +14,7 @@ import (
 )
 
 //Signin with google
-func Signin(signinData *model.Users) error {
+func Signin(signinData *model.User) error {
 	where := "WHERE email = ?"
 	condVal := []interface{}{signinData.Email}
 
@@ -44,7 +44,7 @@ func Signin(signinData *model.Users) error {
 			return err
 		}
 
-		newUser := &model.Users{
+		newUser := &model.User{
 			UUID:  u.String(),
 			Email: signinData.Email,
 			Name:  signinData.Name,
@@ -63,7 +63,7 @@ func Signin(signinData *model.Users) error {
 	return nil
 }
 
-func GenJWT(user *model.Users) (string, error) {
+func GenJWT(user *model.User) (string, error) {
 	claims := &jwt.Claims{
 		UUID:  user.UUID,
 		Email: user.Email,

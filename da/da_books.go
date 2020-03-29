@@ -10,8 +10,8 @@ import (
 	"github.com/blackironj/bookchive-server/model"
 )
 
-func GetBookByID(db *sqlx.DB, id string) (*model.Books, error) {
-	var book model.Books
+func GetBookByID(db *sqlx.DB, id string) (*model.Book, error) {
+	var book model.Book
 
 	stmt := "SELECT * FROM books WHERE id = ?"
 	err := db.Get(&book, stmt, id)
@@ -22,7 +22,7 @@ func GetBookByID(db *sqlx.DB, id string) (*model.Books, error) {
 	return &book, nil
 }
 
-func InsertBooks(tx *sqlx.Tx, books []model.Books) error {
+func InsertBooks(tx *sqlx.Tx, books []*model.Book) error {
 	valStrings := []string{}
 	valArgs := []interface{}{}
 	for _, book := range books {

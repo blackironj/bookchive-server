@@ -10,8 +10,8 @@ import (
 )
 
 //GetUsers get user informations from DB
-func GetUsers(db *sqlx.DB, where string, condVal []interface{}) ([]model.Users, error) {
-	users := []model.Users{}
+func GetUsers(db *sqlx.DB, where string, condVal []interface{}) ([]model.User, error) {
+	users := []model.User{}
 
 	stmt := "SELECT * FROM users " + where
 	err := db.Select(&users, stmt, condVal...)
@@ -27,7 +27,7 @@ func GetUsers(db *sqlx.DB, where string, condVal []interface{}) ([]model.Users, 
 }
 
 //InsertUser add new user to DB
-func InsertUser(tx *sqlx.Tx, user *model.Users) error {
+func InsertUser(tx *sqlx.Tx, user *model.User) error {
 	stmt := "INSERT INTO users (uuid, email, name, signin_dt) VALUES (?, ?, ?, ?)"
 	res, err := tx.Exec(stmt, user.UUID, user.Email, user.Name, time.Now().Unix())
 	if err != nil {

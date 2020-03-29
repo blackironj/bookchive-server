@@ -25,7 +25,7 @@ func SigninWithGoogleCallback(ctx *gin.Context) {
 
 	signinName := signinData.(google.User).Name
 
-	user := &model.Users{
+	user := &model.User{
 		Email: signinData.(google.User).Email,
 		Name:  &signinName,
 	}
