@@ -28,13 +28,13 @@ type Libraries struct {
 	AddedDT  *int64 `db:"added_dt" json:"added_dt"`
 }
 
-//BooksInLibrary Model
-type BooksInLibrary struct {
+//BookInLibrary Model
+type BookInLibrary struct {
 	UK         int     `db:"uk" json:"uk"`
 	BookID     string  `db:"book_id" json:"book_id"`
 	AddedDT    *int64  `db:"added_dt" json:"added_dt"`
 	Title      string  `db:"title" json:"title"`
 	Authors    string  `db:"authors" json:"authors"`
-	Categories *string `db:"categores" json:"categories"`
+	Categories *string `db:"categories" json:"categories"`
 	Thumbnail  *string `db:"thumbnail" json:"thumbnail"`
 }

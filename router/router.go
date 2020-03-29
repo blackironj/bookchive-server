@@ -28,8 +28,10 @@ func InitRouter() *gin.Engine {
 	v1Path := r.Group("/v1")
 	v1Path.Use(jwt.CheckToken())
 	{
-		v1Path.GET("/users/:uuid/books/:book_id", handler.GetBook)
+		v1Path.GET("/books/:book_id", handler.GetBook)
 		v1Path.POST("/libraries", handler.AddLib)
+
+		v1Path.GET("/users/:user_uuid/libraries", handler.GetBooksInLibrary)
 	}
 
 	return r

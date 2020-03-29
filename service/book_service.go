@@ -12,3 +12,11 @@ func GetBook(bookID string) (*model.Books, error) {
 	}
 	return book, nil
 }
+
+func GetBooksInLibrary(userUUID string) ([]*model.BookInLibrary, error) {
+	books, err := da.GetBooksInLibrary(da.DB, userUUID)
+	if err != nil {
+		return nil, err
+	}
+	return books, nil
+}

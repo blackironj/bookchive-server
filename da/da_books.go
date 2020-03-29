@@ -1,6 +1,7 @@
 package da
 
 import (
+	"errors"
 	"fmt"
 	"strings"
 
@@ -46,4 +47,31 @@ func InsertBooks(tx *sqlx.Tx, books []model.Books) error {
 	}
 
 	return nil
+}
+
+func GetBooksInLibrary(db *sqlx.DB, userUUID string) ([]*model.BookInLibrary, error) {
+	var books []*model.BookInLibrary
+
+	stmt :=
+		`SELECT 
+			libraries.uk,
+			libraries.book_id,
+			libraries.added_dt,
+			books.title, 
+			books.authors, 
+			books.categories, 
+			books.thumbnail 
+		FROM libraries
+			LEFT JOIN books ON libraries.book_id = books.id
+		WHERE libraries.user_uuid = ?`
+
+	err := db.Select(&books, stmt, userUUID)
+	if err != nil {
+		return nil, err
+	}
+	if len(books) == 0 {
+		return nil, errors.New("Cannot find books in your libraries")
+	}
+
+	return books, nil
 }

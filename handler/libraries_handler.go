@@ -20,7 +20,6 @@ func AddLib(ctx *gin.Context) {
 
 	data, _ := ctx.Get(jwt.UUID_KEY)
 	uuid := data.(string)
-	fmt.Println("uuid ", uuid)
 
 	if err := service.AddLib(uuid, books); err != nil {
 		ctx.JSON(http.StatusBadRequest, err.Error())
