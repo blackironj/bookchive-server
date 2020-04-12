@@ -38,3 +38,13 @@ type BookInLibrary struct {
 	Categories *string `db:"categories" json:"categories"`
 	Thumbnail  *string `db:"thumbnail" json:"thumbnail"`
 }
+
+type Diary struct {
+	UK          int    `db:"uk" json:"uk"`
+	LibrariesUK int    `db:"libraries_uk" json:"libraries_uk" binding:"required"`
+	Title       string `db:"title" json:"title" binding:"required"`
+	Contents    string `db:"contents" json:"contents" binding:"required"`
+	PosPage     *int   `db:"pos_page" json:"pos_page"`
+	AddedDT     *int64 `db:"added_dt" json:"added_dt"`
+	UpdatedDT   *int64 `db:"updated_dt" json:"update_dt"`
+}
