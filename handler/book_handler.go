@@ -23,9 +23,15 @@ func GetBook(ctx *gin.Context) {
 
 func GetBooksInLibrary(ctx *gin.Context) {
 	userUUID := ctx.Param("user_uuid")
+	selfUUID, _ := ctx.Get(jwt.UUID_KEY)
+
 	if userUUID == "me" {
-		selfUUID, _ := ctx.Get(jwt.UUID_KEY)
 		userUUID = selfUUID.(string)
+	}
+
+	if userUUID != selfUUID.(string) {
+		ctx.JSON(http.StatusForbidden, "you cannot see other user's book list")
+		return
 	}
 
 	books, err := service.GetBooksInLibrary(userUUID)
