@@ -31,7 +31,7 @@ func CheckToken() gin.HandlerFunc {
 			}
 		}
 		if err != nil {
-			c.JSON(http.StatusUnauthorized, err)
+			c.JSON(http.StatusUnauthorized, err.Error())
 
 			c.Abort()
 			return
