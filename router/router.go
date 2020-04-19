@@ -34,6 +34,7 @@ func InitRouter() *gin.Engine {
 		v1Path.POST("/diaries", handler.AddDiary)
 
 		v1Path.GET("/users/:user_uuid/libraries", handler.GetBooksInLibrary)
+		v1Path.GET("/users/:user_uuid/diaries/:library_uk", handler.GetDiaries)
 	}
 
 	return r
